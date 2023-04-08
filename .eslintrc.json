@@ -7,10 +7,7 @@
     "airbnb",
     "next",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "plugin:testing-library/react",
-    "plugin:jest-dom/recommended",
-    "plugin:storybook/recommended"
+    "prettier"
   ],
   "globals": {
     "Atomics": "readonly",
