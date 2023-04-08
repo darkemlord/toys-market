@@ -9,4 +9,6 @@ const testSchema = new Schema({
   },
 });
 
-const Test = model("Test", testSchema);
+const Test = models.Test || model("Test", testSchema);
+
+export default Test;
