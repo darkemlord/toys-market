@@ -37,7 +37,10 @@ async function deleteUser(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === "POST") {
     updateUser(req, res);
   } else if (req.method === "DELETE") {
