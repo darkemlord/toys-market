@@ -4,7 +4,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import connectMongo from "@/utils/db/connectMongo";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import User, { IUserDocument, UserRole } from "@/models/userModel";
 import isAuthenticated from "@/utils/middleware/authentication";
 
@@ -38,14 +37,16 @@ async function deleteUser(req: NextApiRequest, res: NextApiResponse) {
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET as string);
 
       let role: string;
-
+      let adminId: string;
       if (typeof decodedToken === "string") {
         role = decodedToken;
+        adminId = decodedToken;
       } else {
         role = decodedToken.role;
+        adminId = decodedToken.id;
       }
 
-      if (role === UserRole.Admin) {
+      if (role === UserRole.Admin && userToDeleteId !== adminId) {
         await User.findByIdAndDelete(userToDeleteId);
         res.send({
           message: "User deleted successfully",
