@@ -5,7 +5,6 @@ import connectMongo from "@/utils/db/connectMongo";
 import bcrypt from "bcrypt";
 import User, { IUserDocument } from "@/models/userModel";
 
-// Update the logic once the App is running
 async function updateUser(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectMongo();
@@ -16,8 +15,10 @@ async function updateUser(req: NextApiRequest, res: NextApiResponse) {
     const user = await User.findByIdAndUpdate(id, {
       password: hashedPassword,
     });
-    if (!user) return res.json({ error: "can't find the user" });
-    res.json({
+    if (!user) {
+      return res.json({ error: "Can't find the user" });
+    }
+    return res.json({
       message: "Password updated successfully",
     });
   } catch (err) {
@@ -42,8 +43,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    updateUser(req, res);
+    await updateUser(req, res);
   } else if (req.method === "DELETE") {
-    deleteUser(req, res);
+    await deleteUser(req, res);
+  } else {
+    res.status(405).send({ error: "Method Not Allowed" });
   }
 }
