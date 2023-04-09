@@ -42,7 +42,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "POST") {
+  if (req.method === "PUT") {
     await updateUser(req, res);
   } else if (req.method === "DELETE") {
     await deleteUser(req, res);
