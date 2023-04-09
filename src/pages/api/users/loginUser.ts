@@ -12,7 +12,7 @@ export default async function loginUser(
 ) {
   try {
     await connectMongo();
-    const { email, password } = req.body as IUserDocument;
+    const { email, password }: IUserDocument = req.body;
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({
@@ -27,7 +27,7 @@ export default async function loginUser(
     }
     const token = jwt.sign(
       { id: user.id, username: user.username },
-      process.env.SECRET as string
+      process.env.JWT_SECRET as string
     );
     res.json({ token });
   } catch (err) {

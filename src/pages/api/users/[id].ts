@@ -9,7 +9,7 @@ async function updateUser(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectMongo();
     const { id } = req.query;
-    const { password } = req.body as IUserDocument;
+    const { password }: IUserDocument = req.body;
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     const user = await User.findByIdAndUpdate(id, {
