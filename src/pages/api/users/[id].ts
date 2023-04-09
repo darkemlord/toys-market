@@ -2,8 +2,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { NextApiRequest, NextApiResponse } from "next";
 import connectMongo from "@/utils/db/connectMongo";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import User, { IUserDocument } from "@/models/userModel";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import User, { IUserDocument, UserRole } from "@/models/userModel";
+import isAuthenticated from "@/utils/middleware/authentication";
 
 async function updateUser(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -28,20 +31,35 @@ async function updateUser(req: NextApiRequest, res: NextApiResponse) {
 
 async function deleteUser(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { id } = req.query;
-    await User.findByIdAndDelete(id);
-    res.send({
-      message: "User deleted successfully",
-    });
+    const token = req.headers.authorization;
+    const { id: userToDeleteId } = req.query;
+
+    if (token) {
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET as string);
+
+      let role: string;
+
+      if (typeof decodedToken === "string") {
+        role = decodedToken;
+      } else {
+        role = decodedToken.role;
+      }
+
+      if (role === UserRole.Admin) {
+        await User.findByIdAndDelete(userToDeleteId);
+        res.send({
+          message: "User deleted successfully",
+        });
+      } else {
+        res.send({ message: "You don't have the necessary permissions." });
+      }
+    }
   } catch (err) {
     res.json({ error: err });
   }
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "PUT") {
     await updateUser(req, res);
   } else if (req.method === "DELETE") {
@@ -50,3 +68,5 @@ export default async function handler(
     res.status(405).send({ error: "Method Not Allowed" });
   }
 }
+
+export default isAuthenticated(handler);

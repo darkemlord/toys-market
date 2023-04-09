@@ -26,7 +26,7 @@ export default async function loginUser(
       });
     }
     const token = jwt.sign(
-      { id: user.id, username: user.username },
+      { id: user.id, username: user.username, role: user.role },
       process.env.JWT_SECRET as string
     );
     res.json({ token });

@@ -11,13 +11,13 @@ export default async function addUser(
 ) {
   try {
     await connectMongo();
-    const { username, password, email }: IUserDocument = req.body;
+    const { username, password, email, role }: IUserDocument = req.body;
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const newUser = { username, password: hashedPassword, email };
+    const newUser = { username, password: hashedPassword, email, role };
     const user = await User.create(newUser);
     const token = jwt.sign(
-      { username: user.username, email: user.email },
+      { username: user.username, email: user.email, role: user.role },
       process.env.JWT_SECRET as string,
       { expiresIn: "24h" }
     );
