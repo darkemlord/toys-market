@@ -6,10 +6,7 @@ import bcrypt from "bcrypt";
 import User, { IUserDocument } from "@/models/userModel";
 
 // Update the logic once the App is running
-export default async function updateUser(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function updateUser(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectMongo();
     const { id } = req.query;
@@ -25,5 +22,25 @@ export default async function updateUser(
     });
   } catch (err) {
     res.json({ err });
+  }
+}
+
+async function deleteUser(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const { id } = req.query;
+    await User.findByIdAndDelete(id);
+    res.send({
+      message: "User deleted successfully",
+    });
+  } catch (err) {
+    res.json({ error: err });
+  }
+}
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === "POST") {
+    updateUser(req, res);
+  } else if (req.method === "DELETE") {
+    deleteUser(req, res);
   }
 }
