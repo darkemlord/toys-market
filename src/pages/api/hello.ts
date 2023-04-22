@@ -1,8 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 
+type Data = {
+  name: string;
+};
+
 /**
  * @swagger
+ * paths:
  * /api/hello:
  *   get:
  *     description: Returns the hello world
@@ -10,10 +15,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
  *       200:
  *         description: hello world
  */
-
-type Data = {
-  name: string;
-};
 
 export default function handler(
   req: NextApiRequest,
