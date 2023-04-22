@@ -4,6 +4,16 @@ import connectMongo from "@/utils/db/connectMongo";
 import User, { IUserDocument } from "@/models/userModel";
 import isAuthenticated from "@/utils/middleware/authentication";
 
+/**
+ * @swagger
+ * /api/users/getUsers:
+ *   get:
+ *     description: Returns the user list
+ *     responses:
+ *       200:
+ *         description: user list
+ */
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     connectMongo();
