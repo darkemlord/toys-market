@@ -30,6 +30,12 @@ Run the next command to update the public swagger.json file
   yarn next-swagger-doc-cli next-swagger-doc.json
 ```
 
+### Generate TS types from swagger
+
+```bash
+    swagger-typescript-api --path ./public/swagger.json --output ./src/lib/
+```
+
 ### Go to this link for more swagger type info
 
 - [swagger basic structure](https://swagger.io/docs/specification/basic-structure/)

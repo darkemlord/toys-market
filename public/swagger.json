@@ -7,6 +7,9 @@
   "paths": {
     "/api/hello": {
       "get": {
+        "tags": [
+          "Greetings"
+        ],
         "description": "Returns the hello world",
         "responses": {
           "200": {
@@ -15,8 +18,92 @@
         }
       }
     },
+    "/api/users/[id]": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Returns updated user info",
+        "responses": {
+          "200": {
+            "description": "user updated info"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Delete an user",
+        "responses": {
+          "200": {
+            "description": "Success deleted"
+          }
+        }
+      }
+    },
+    "/api/users/createUser": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create a new user",
+        "operationId": "CreateUser",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "description": "User information",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "username",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return a success message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/users/getUsers": {
       "get": {
+        "tags": [
+          "Users"
+        ],
         "description": "Returns the user list",
         "responses": {
           "200": {
