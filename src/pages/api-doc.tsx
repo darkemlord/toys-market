@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
       openapi: "3.0.0",
       info: {
         title: "Next Swagger API Example",
-        version: "1.0",
+        version: "0.1.0",
       },
     },
     apiFolder: "./src/pages/api",
