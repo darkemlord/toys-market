@@ -30,6 +30,10 @@ Run the next command to update the public swagger.json file
   yarn next-swagger-doc-cli next-swagger-doc.json
 ```
 
+### Go to this link for more swagger type info
+
+- [swagger basic structure](https://swagger.io/docs/specification/basic-structure/)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
