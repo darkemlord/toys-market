@@ -5,6 +5,16 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User, { IUserDocument } from "@/models/userModel";
 
+/**
+ * @swagger
+ * /api/users/createUser:
+ *   post:
+ *     description: Create a new user
+ *     responses:
+ *       200:
+ *         description: New user info
+ */
+
 export default async function addUser(
   req: NextApiRequest,
   res: NextApiResponse

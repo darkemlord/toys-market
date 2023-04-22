@@ -7,6 +7,25 @@ import bcrypt from "bcrypt";
 import User, { IUserDocument, UserRole } from "@/models/userModel";
 import isAuthenticated from "@/utils/middleware/authentication";
 
+/**
+ * @swagger
+ * /api/users/[id]:
+ *   put:
+ *     description: Returns updated user info
+ *     responses:
+ *       200:
+ *         description: user updated info
+ */
+
+/**
+ * @swagger
+ * /api/users/[id]:
+ *   delete:
+ *     description: Delete an user
+ *     responses:
+ *       200:
+ *         description: Success deleted
+ */
 async function updateUser(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectMongo();
