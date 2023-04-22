@@ -10,6 +10,8 @@ type Data = {
  * @swagger
  * /api/hello:
  *   get:
+ *     tags:
+ *       - Greetings
  *     description: Returns the hello world
  *     responses:
  *       200:

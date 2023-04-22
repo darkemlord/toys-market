@@ -11,6 +11,8 @@ import isAuthenticated from "@/utils/middleware/authentication";
  * @swagger
  * /api/users/[id]:
  *   put:
+ *     tags:
+ *       - Users
  *     description: Returns updated user info
  *     responses:
  *       200:
@@ -21,6 +23,8 @@ import isAuthenticated from "@/utils/middleware/authentication";
  * @swagger
  * /api/users/[id]:
  *   delete:
+ *     tags:
+ *       - Users
  *     description: Delete an user
  *     responses:
  *       200:

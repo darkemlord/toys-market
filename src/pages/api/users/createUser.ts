@@ -9,6 +9,8 @@ import User, { IUserDocument } from "@/models/userModel";
  * @swagger
  * /api/users/createUser:
  *   post:
+ *     tags:
+ *       - Users
  *     description: Create a new user
  *     responses:
  *       200:

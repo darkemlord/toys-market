@@ -8,6 +8,8 @@ import isAuthenticated from "@/utils/middleware/authentication";
  * @swagger
  * /api/users/getUsers:
  *   get:
+ *     tags:
+ *       - Users
  *     description: Returns the user list
  *     responses:
  *       200:
