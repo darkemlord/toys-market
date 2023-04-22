@@ -30,7 +30,7 @@ export default async function loginUser(
       process.env.JWT_SECRET as string
     );
     res.json({ token });
-  } catch (err) {
-    res.json({ error: err });
+  } catch (err: any) {
+    res.json({ error: err.message });
   }
 }

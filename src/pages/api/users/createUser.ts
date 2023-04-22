@@ -12,9 +12,38 @@ import User, { IUserDocument } from "@/models/userModel";
  *     tags:
  *       - Users
  *     description: Create a new user
+ *     operationId: CreateUser
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - name: user
+ *         description: User information
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           required:
+ *             - username
+ *             - email
+ *             - password
+ *           properties:
+ *             username:
+ *               type: string
+ *             email:
+ *               type: string
+ *             password:
+ *               type: string
+ *               format: password
  *     responses:
  *       200:
- *         description: New user info
+ *         description: Return a success message
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 
 export default async function addUser(
@@ -38,7 +67,7 @@ export default async function addUser(
     if (err.code === 11000) {
       res.json({ error: `User ${req.body.email} already exist` });
     } else {
-      res.json({ error: err });
+      res.json({ error: err.message });
     }
   }
 }
