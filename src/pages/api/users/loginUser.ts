@@ -6,17 +6,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User, { IUserDocument } from "@/models/userModel";
 
-/**
- * @swagger
- * paths:
- * /api/users/loginUser:
- *   get:
- *     description: Returns the users
- *     responses:
- *       200:
- *         description: users
- */
-
 export default async function loginUser(
   req: NextApiRequest,
   res: NextApiResponse
